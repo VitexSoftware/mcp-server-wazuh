@@ -11,7 +11,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11"
 keywords = ["mcp", "wazuh", "model-context-protocol", "siem"]
-dependencies = ["mcp>=2.0.0", "fastmcp>=4.0.0b1"]
+dependencies = ["mcp>=2.0.0", "fastmcp>=4.1.4"]
 
 [project.scripts]
 mcp-server-wazuh = "mcp_server_wazuh.__main__:main"

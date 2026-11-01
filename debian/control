@@ -12,7 +12,7 @@ Package: mcp-server-wazuh
 Architecture: all
 Depends: ${misc:Depends}, ${python3:Depends},
  python3-mcp (>= 1:2.0.0),
- python3-fastmcp (>= 4.0.0~b1),
+ python3-fastmcp (>= 4.1.4),
 Description: stdio MCP server for Wazuh 5
  Model Context Protocol (MCP) server that reads a Wazuh 5 manager
  (agents, groups, cluster, MITRE) and the indexer (events, findings,
