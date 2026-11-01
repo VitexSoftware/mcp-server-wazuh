@@ -12,6 +12,7 @@
       vulnerabilities on the indexer.
     </p>
   </description>
+  <icon type="stock">mcp-server-wazuh</icon>
   <provides>
     <binary>mcp-server-wazuh</binary>
   </provides>

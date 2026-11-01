@@ -1,3 +1,9 @@
+mcp-server-wazuh (1.0.0-2) unstable; urgency=low
+
+  * Install mcp-server-wazuh.svg as the AppStream stock icon.
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sun, 01 Nov 2026 10:45:00 +0100
+
 mcp-server-wazuh (1.0.0-1) unstable; urgency=low
 
   * Initial release: stdio MCP server for the Wazuh 5 manager API and indexer.
