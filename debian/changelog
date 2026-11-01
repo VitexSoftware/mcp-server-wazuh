@@ -1,3 +1,12 @@
+mcp-server-wazuh (1.0.0-3) unstable; urgency=low
+
+  * Depend on python3-fastmcp (>= 4.0.10). The testing repository publishes
+    4.0.10.38~trixie, so (>= 4.1.4) made the package uninstallable and the
+    unit test then failed with "mcp-server-wazuh: not found".
+  * Fail the Jenkins test stage when apt-get install fails.
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sun, 01 Nov 2026 17:00:00 +0100
+
 mcp-server-wazuh (1.0.0-2) unstable; urgency=low
 
   * Install mcp-server-wazuh.svg as the AppStream stock icon.
