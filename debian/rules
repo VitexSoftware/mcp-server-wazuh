@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME=mcp_server_wazuh
+
+%:
+	dh $@ --with python3 --buildsystem=pybuild
+
+override_dh_auto_install:
+	dh_auto_install --destdir=debian/mcp-server-wazuh
+
+override_dh_auto_test:
+	# Tests run as autopkgtest. The build chroot does not guarantee
+	# python3-mcp / python3-fastmcp.

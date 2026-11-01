@@ -1,0 +1,2 @@
+debian/io.github.vitexus.mcp_server_wazuh.metainfo.xml usr/share/metainfo/
+debian/server.json usr/share/mcp-server-wazuh/

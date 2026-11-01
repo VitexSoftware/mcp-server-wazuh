@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+mcp-server-wazuh --version
+cd "${AUTOPKGTEST_TMP:-/tmp}"
+cp -r "${AUTOPKGTEST_ARTIFACTS:-$OLDPWD}/tests" . 2>/dev/null || cp -r "$OLDPWD/tests" .
+python3 -m pytest -q -p no:cacheprovider tests

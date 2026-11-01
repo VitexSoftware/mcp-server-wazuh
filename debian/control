@@ -1,0 +1,30 @@
+Source: mcp-server-wazuh
+Section: python
+Priority: optional
+Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
+Build-Depends: debhelper-compat (= 13), dh-python, pybuild-plugin-pyproject, python3-all, python3-setuptools
+Standards-Version: 4.6.2
+Homepage: https://github.com/VitexSoftware/mcp-server-wazuh
+Vcs-Git: https://github.com/VitexSoftware/mcp-server-wazuh.git
+Vcs-Browser: https://github.com/VitexSoftware/mcp-server-wazuh
+
+Package: mcp-server-wazuh
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends},
+ python3-mcp (>= 1:2.0.0),
+ python3-fastmcp (>= 4.0.0~b1),
+Description: stdio MCP server for Wazuh 5
+ Model Context Protocol (MCP) server that reads a Wazuh 5 manager
+ (agents, groups, cluster, MITRE) and the indexer (events, findings,
+ vulnerability state). Restarting agents is hidden unless
+ WAZUH_READ_ONLY is set to false.
+
+Package: mcprack-mcp-server-wazuh
+Architecture: all
+Depends: ${misc:Depends},
+ mcprack (>= 1.5.4),
+ mcp-server-wazuh (= ${binary:Version}),
+Description: Registers Wazuh MCP server into mcprack catalog
+ Companion package for mcp-server-wazuh. Installing it registers
+ the mcp-server-wazuh binary as an available MCP server in the local
+ mcprack instance; removing it unregisters it again.

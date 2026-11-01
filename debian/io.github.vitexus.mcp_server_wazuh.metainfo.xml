@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="console-application">
+  <id>io.github.vitexus.mcp_server_wazuh</id>
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Wazuh MCP Server</name>
+  <summary>Query Wazuh 5 from an MCP client</summary>
+  <description>
+    <p>
+      Model Context Protocol server for Wazuh 5. Lists agents, groups and
+      cluster nodes from the manager API, and searches events, findings and
+      vulnerabilities on the indexer.
+    </p>
+  </description>
+  <provides>
+    <binary>mcp-server-wazuh</binary>
+  </provides>
+  <url type="homepage">https://github.com/VitexSoftware/mcp-server-wazuh</url>
+  <developer id="cz.vitexsoftware">
+    <name>Vítězslav Dvořák</name>
+  </developer>
+  <releases>
+    <release version="1.0.0" date="2026-11-01"/>
+  </releases>
+</component>

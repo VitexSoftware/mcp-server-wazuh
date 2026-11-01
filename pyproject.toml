@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-server-wazuh"
+version = "1.0.0"
+description = "stdio MCP server for Wazuh 5 manager and indexer"
+authors = [{ name = "Vítězslav Dvořák", email = "info@vitexsoftware.cz" }]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+keywords = ["mcp", "wazuh", "model-context-protocol", "siem"]
+dependencies = ["mcp>=2.0.0", "fastmcp>=4.0.0b1"]
+
+[project.scripts]
+mcp-server-wazuh = "mcp_server_wazuh.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

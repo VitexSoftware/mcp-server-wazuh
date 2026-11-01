@@ -1,0 +1,93 @@
+{
+  "environmentVariables": [
+    {
+      "name": "WAZUH_API_URL",
+      "description": "Wazuh 5 manager API base URL.",
+      "isRequired": false,
+      "isSecret": false,
+      "default": "https://127.0.0.1:55000"
+    },
+    {
+      "name": "WAZUH_API_USER",
+      "description": "Manager API user. Exchanged for a short-lived JWT and never printed.",
+      "isRequired": true,
+      "isSecret": true
+    },
+    {
+      "name": "WAZUH_API_PASSWORD",
+      "description": "Manager API password.",
+      "isRequired": true,
+      "isSecret": true
+    },
+    {
+      "name": "WAZUH_INDEXER_URL",
+      "description": "Wazuh indexer URL used for events, findings and vulnerability state.",
+      "isRequired": false,
+      "isSecret": false,
+      "default": "https://127.0.0.1:9200"
+    },
+    {
+      "name": "WAZUH_INDEXER_USER",
+      "description": "Indexer user for search tools. Required only for search_events, search_findings and search_vulnerabilities.",
+      "isRequired": false,
+      "isSecret": true
+    },
+    {
+      "name": "WAZUH_INDEXER_PASSWORD",
+      "description": "Indexer password. Required only for the indexer search tools.",
+      "isRequired": false,
+      "isSecret": true
+    },
+    {
+      "name": "WAZUH_READ_ONLY",
+      "description": "When true, restart_agents is not registered.",
+      "isRequired": false,
+      "isSecret": false,
+      "default": "true",
+      "choices": ["true", "false"]
+    },
+    {
+      "name": "WAZUH_VERIFY_TLS",
+      "description": "Verify TLS certificates for the manager API and the indexer.",
+      "isRequired": false,
+      "isSecret": false,
+      "default": "true",
+      "choices": ["true", "false"]
+    },
+    {
+      "name": "WAZUH_TIMEOUT",
+      "description": "Seconds to wait for one request.",
+      "isRequired": false,
+      "isSecret": false,
+      "default": "30"
+    },
+    {
+      "name": "WAZUH_MAX_CHARS",
+      "description": "Truncate tool output longer than this many characters.",
+      "isRequired": false,
+      "isSecret": false,
+      "default": "100000"
+    },
+    {
+      "name": "WAZUH_EVENTS_INDEX",
+      "description": "Indexer data stream for raw events.",
+      "isRequired": false,
+      "isSecret": false,
+      "default": "wazuh-events-v5*"
+    },
+    {
+      "name": "WAZUH_FINDINGS_INDEX",
+      "description": "Indexer data stream for rule-match findings.",
+      "isRequired": false,
+      "isSecret": false,
+      "default": "wazuh-findings-v5*"
+    },
+    {
+      "name": "WAZUH_VULN_INDEX",
+      "description": "Indexer index for vulnerability state.",
+      "isRequired": false,
+      "isSecret": false,
+      "default": "wazuh-states-vulnerabilities"
+    }
+  ]
+}

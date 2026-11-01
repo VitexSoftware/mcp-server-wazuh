@@ -1,0 +1,9 @@
+{
+  "identifier": "mcp-server-wazuh",
+  "name": "Wazuh MCP Server",
+  "description": "stdio MCP server for Wazuh 5 agents, findings and vulnerabilities",
+  "category": "monitoring",
+  "prompts": [],
+  "homepage": "https://github.com/VitexSoftware/mcp-server-wazuh",
+  "author": "Vítězslav Dvořák <info@vitexsoftware.cz>"
+}
