@@ -46,18 +46,41 @@ def _agent_id(value: str) -> str:
     return value
 
 
-def _search_body(query: str, limit: int, offset: int, agent_id: str | None) -> dict[str, Any]:
+# Wazuh 5 data streams keep the agent under wazuh.agent; the 4.x-style state
+# indices use agent. Match either so one filter works on every index.
+_AGENT_FIELDS = ("wazuh.agent.id", "agent.id")
+
+
+def _agent_filter(agent_id: str) -> dict[str, Any]:
+    value = _agent_id(agent_id)
+    return {
+        "bool": {
+            "should": [{"term": {field: value}} for field in _AGENT_FIELDS],
+            "minimum_should_match": 1,
+        }
+    }
+
+
+def _search_body(
+    query: str,
+    limit: int,
+    offset: int,
+    agent_id: str | None,
+    sort_field: str = "@timestamp",
+) -> dict[str, Any]:
     must: list[dict[str, Any]] = []
     if query.strip():
         must.append({"query_string": {"query": query}})
     else:
         must.append({"match_all": {}})
     if agent_id:
-        must.append({"term": {"agent.id": _agent_id(agent_id)}})
+        must.append(_agent_filter(agent_id))
     return {
         "size": _limit(limit),
         "from": _offset(offset),
-        "sort": [{"@timestamp": "desc"}],
+        # unmapped_type keeps the query working on an index (or a fresh, empty
+        # one) that lacks the sort field, instead of failing the whole search.
+        "sort": [{sort_field: {"order": "desc", "unmapped_type": "date"}}],
         "query": {"bool": {"must": must}},
     }
 
@@ -155,8 +178,11 @@ def build_server(client: WazuhClient) -> FastMCP:
         offset: Annotated[int, Field(description="Result offset, from 0 to 10000")] = 0,
         agent_id: Annotated[str | None, Field(description="Optional agent id filter")] = None,
     ) -> str:
-        """Search the wazuh-states-vulnerabilities index."""
-        return client.indexer(config.vuln_index, _search_body(_query(query), limit, offset, agent_id))
+        """Search the wazuh-states-vulnerabilities index, newest detections first. Example query: vulnerability.severity:Critical"""
+        return client.indexer(
+            config.vuln_index,
+            _search_body(_query(query), limit, offset, agent_id, sort_field="vulnerability.detected_at"),
+        )
 
     if not config.read_only:
 

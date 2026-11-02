@@ -80,7 +80,23 @@ async def test_list_agents_and_findings(monkeypatch):
     kind, index, body = client.calls[1]
     assert kind == "indexer"
     assert index == "wazuh-findings-v5*"
-    assert body["query"]["bool"]["must"][1] == {"term": {"agent.id": "001"}}
+    assert body["query"]["bool"]["must"][1] == {
+        "bool": {
+            "should": [{"term": {"wazuh.agent.id": "001"}}, {"term": {"agent.id": "001"}}],
+            "minimum_should_match": 1,
+        }
+    }
+    assert body["sort"] == [{"@timestamp": {"order": "desc", "unmapped_type": "date"}}]
+
+
+async def test_vulnerabilities_sort_does_not_need_timestamp():
+    client, server = _tools(True)
+    async with Client(server) as mcp:
+        await mcp.call_tool("search_vulnerabilities", {"query": "vulnerability.severity:Critical"})
+    _, index, body = client.calls[0]
+    assert index == "wazuh-states-vulnerabilities"
+    assert body["sort"] == [{"vulnerability.detected_at": {"order": "desc", "unmapped_type": "date"}}]
+    assert "@timestamp" not in json.dumps(body)
 
 
 async def test_invalid_agent_does_not_call():

@@ -1,3 +1,15 @@
+mcp-server-wazuh (1.0.0-4) unstable; urgency=medium
+
+  * search_vulnerabilities: sort by vulnerability.detected_at. The
+    wazuh-states-vulnerabilities index has no @timestamp, so every call
+    failed with "No mapping found for [@timestamp] in order to sort on".
+  * Sort with unmapped_type=date so an index lacking the sort field no
+    longer fails the whole search.
+  * agent_id filter: match wazuh.agent.id (Wazuh 5 data streams) as well
+    as agent.id. The filter returned nothing on events and findings.
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Mon, 02 Nov 2026 10:45:00 +0100
+
 mcp-server-wazuh (1.0.0-3) unstable; urgency=low
 
   * Depend on python3-fastmcp (>= 4.0.10). The testing repository publishes
